@@ -1,14 +1,67 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import {StyleSheet, Text, TouchableHighlight, View} from 'react-native';
+import React, {useContext} from 'react';
+import AppTextInput from '../components/AppTextInput';
+import {LIGHT_GREY} from '../config/colors';
+import {Formik} from 'formik';
 
-const ContactDetailsScreen = () => {
+const Header = ({title}) => (
+  <View style={styles.header}>
+    <Text>{title}</Text>
+  </View>
+);
+
+const ContactDetailsScreen = ({route}) => {
+  const person = route?.params?.person;
+
   return (
     <View>
-      <Text>ContactDetailsScreen</Text>
+      <Text>{person.firstName}</Text>
+      <Formik
+        initialValues={{...person}}
+        onSubmit={values => console.log(values)}>
+        {({handleChange, handleSubmit, values}) => {
+          console.log('value', values);
+          return (
+            <>
+              <Header title="Main Information" />
+              <AppTextInput
+                title="First Name"
+                value={values.firstName}
+                onChangeText={handleChange('firstName')}
+              />
+              <AppTextInput
+                title="Last Name"
+                value={values.lastName}
+                onChangeText={handleChange('lastName')}
+              />
+              <Header title="Sub Information" />
+              <AppTextInput
+                title="Email"
+                value={values.email}
+                onChangeText={handleChange('email')}
+              />
+              <AppTextInput
+                title="Phone"
+                value={values.phone}
+                onChangeText={handleChange('phone')}
+              />
+              <TouchableHighlight onPress={handleSubmit}>
+                <Text>Submit</Text>
+              </TouchableHighlight>
+            </>
+          );
+        }}
+      </Formik>
     </View>
   );
 };
 
 export default ContactDetailsScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  header: {
+    backgroundColor: LIGHT_GREY,
+    paddingVertical: 2,
+    marginVertical: 5,
+  },
+});
