@@ -1,10 +1,11 @@
 import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import React, {useContext} from 'react';
 import ContactsList from '../components/ContactsList';
-
-import persons from '../config/data.json';
+import PersonContext from '../contexts/PersonContext';
 
 const ContactsScreen = () => {
+  const {persons} = useContext(PersonContext);
+
   return (
     <View style={styles.container}>
       <ContactsList data={persons} />

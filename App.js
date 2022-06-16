@@ -1,5 +1,6 @@
 import {DefaultTheme, NavigationContainer} from '@react-navigation/native';
 import React from 'react';
+import {PersonProvider} from './app/contexts/PersonContext';
 import StackNavigator from './app/navigation/StackNavigator';
 
 const Theme = {
@@ -13,7 +14,9 @@ const Theme = {
 const App = () => {
   return (
     <NavigationContainer theme={Theme}>
-      <StackNavigator />
+      <PersonProvider>
+        <StackNavigator />
+      </PersonProvider>
     </NavigationContainer>
   );
 };
