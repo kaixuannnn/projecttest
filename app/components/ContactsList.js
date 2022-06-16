@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
-import {LIGHT_GREY} from '../config/colors';
+import {LIGHT_GREY, PRIMARY_COLOR} from '../config/colors';
 
 const Separator = () => <View style={styles.separator} />;
 
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     height: 40,
     width: 40,
     borderRadius: 20,
-    backgroundColor: '#ff8c00',
+    backgroundColor: PRIMARY_COLOR,
     marginRight: 10,
   },
   listItem: {
