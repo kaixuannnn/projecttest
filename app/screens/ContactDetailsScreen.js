@@ -23,6 +23,11 @@ const ContactDetailsScreen = ({navigation, route}) => {
   const {addPerson} = useContext(PersonContext);
   const formikRef = useRef();
 
+  const firstNameRef = useRef();
+  const lastNameRef = useRef();
+  const phoneRef = useRef();
+  const emailRef = useRef();
+
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
@@ -51,22 +56,29 @@ const ContactDetailsScreen = ({navigation, route}) => {
               title="First Name"
               value={values.firstName}
               onChangeText={handleChange('firstName')}
+              ref={firstNameRef}
+              onSubmitEditing={() => lastNameRef.current.focus()}
             />
             <AppTextInput
               title="Last Name"
               value={values.lastName}
               onChangeText={handleChange('lastName')}
+              ref={lastNameRef}
+              onSubmitEditing={() => emailRef.current.focus()}
             />
             <Header title="Sub Information" />
             <AppTextInput
               title="Email"
               value={values.email}
               onChangeText={handleChange('email')}
+              ref={emailRef}
+              onSubmitEditing={() => phoneRef.current.focus()}
             />
             <AppTextInput
               title="Phone"
               value={values.phone}
               onChangeText={handleChange('phone')}
+              ref={phoneRef}
             />
             <TouchableHighlight onPress={handleSubmit}>
               <Text>Submit</Text>

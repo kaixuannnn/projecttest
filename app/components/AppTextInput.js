@@ -1,15 +1,20 @@
 import {StyleSheet, Text, TextInput, View} from 'react-native';
-import React from 'react';
+import React, {forwardRef} from 'react';
 import {LIGHT_GREY} from '../config/colors';
 
-const AppTextInput = ({title, ...props}) => {
+const AppTextInput = forwardRef((props, ref) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.inputTitle}>{title}</Text>
-      <TextInput style={styles.inputContainer} {...props} />
+      <Text style={styles.inputTitle}>{props.title}</Text>
+      <TextInput
+        ref={ref}
+        style={styles.inputContainer}
+        returnKeyType="next"
+        {...props}
+      />
     </View>
   );
-};
+});
 
 export default AppTextInput;
 
