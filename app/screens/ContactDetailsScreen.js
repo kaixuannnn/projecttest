@@ -21,14 +21,14 @@ const Header = ({title}) => (
 const ContactDetailsScreen = ({navigation, route}) => {
   const person = route?.params?.person;
   const {addPerson} = useContext(PersonContext);
-  const ref = useRef();
-  console.log(ref);
+  const formikRef = useRef();
+
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
         <TouchableOpacity
           onPress={() => {
-            ref?.current?.handleSubmit();
+            formikRef?.current?.handleSubmit();
             navigation.goBack();
           }}>
           <Text style={styles.save}>Save</Text>
@@ -36,13 +36,14 @@ const ContactDetailsScreen = ({navigation, route}) => {
       ),
     });
   }, [navigation]);
+
   return (
     <View>
       <Text>{person.firstName}</Text>
       <Formik
         initialValues={{...person}}
         onSubmit={values => addPerson(values)}
-        innerRef={ref}>
+        innerRef={formikRef}>
         {({handleChange, handleSubmit, values}) => (
           <>
             <Header title="Main Information" />
