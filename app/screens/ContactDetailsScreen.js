@@ -80,9 +80,6 @@ const ContactDetailsScreen = ({navigation, route}) => {
               onChangeText={handleChange('phone')}
               ref={phoneRef}
             />
-            <TouchableHighlight onPress={handleSubmit}>
-              <Text>Submit</Text>
-            </TouchableHighlight>
           </>
         )}
       </Formik>

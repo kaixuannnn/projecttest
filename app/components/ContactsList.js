@@ -8,8 +8,6 @@ import {
 import React, {useContext, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {LIGHT_GREY, PRIMARY_COLOR} from '../config/colors';
-
-import initialData from '../config/data.json';
 import PersonContext from '../contexts/PersonContext';
 
 const Separator = () => <View style={styles.separator} />;
