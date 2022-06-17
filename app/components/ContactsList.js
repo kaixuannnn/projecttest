@@ -5,14 +5,20 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import React from 'react';
+import React, {useContext, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {LIGHT_GREY, PRIMARY_COLOR} from '../config/colors';
+
+import initialData from '../config/data.json';
+import PersonContext from '../contexts/PersonContext';
 
 const Separator = () => <View style={styles.separator} />;
 
 const ContactsList = ({data}) => {
   const navigation = useNavigation();
+  const {setBackToInitial} = useContext(PersonContext);
+  const [loading, setLoading] = useState(false);
+
   const renderItem = ({item}) => {
     return (
       <TouchableWithoutFeedback
@@ -32,6 +38,12 @@ const ContactsList = ({data}) => {
       renderItem={renderItem}
       data={data}
       ItemSeparatorComponent={Separator}
+      onRefresh={() => {
+        setLoading(true);
+        setBackToInitial();
+        setLoading(false);
+      }}
+      refreshing={loading}
     />
   );
 };
