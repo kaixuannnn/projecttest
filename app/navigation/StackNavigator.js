@@ -8,7 +8,11 @@ const Stack = createNativeStackNavigator();
 const StackNavigator = () => (
   <Stack.Navigator>
     <Stack.Screen name="Contacts" component={ContactsScreen} />
-    <Stack.Screen name="ContactDetails" component={ContactDetailsScreen} />
+    <Stack.Screen
+      name="ContactDetails"
+      component={ContactDetailsScreen}
+      options={{headerBackTitle: 'Cancel'}}
+    />
   </Stack.Navigator>
 );
 

@@ -1,9 +1,16 @@
-import {StyleSheet, Text, TouchableHighlight, View} from 'react-native';
-import React, {useContext} from 'react';
+import {
+  StyleSheet,
+  Text,
+  TouchableHighlight,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import React, {useContext, useLayoutEffect} from 'react';
 import AppTextInput from '../components/AppTextInput';
-import {LIGHT_GREY} from '../config/colors';
+import {LIGHT_GREY, PRIMARY_COLOR} from '../config/colors';
 import {Formik} from 'formik';
 import PersonContext from '../contexts/PersonContext';
+import {useRef} from 'react';
 
 const Header = ({title}) => (
   <View style={styles.header}>
@@ -11,15 +18,31 @@ const Header = ({title}) => (
   </View>
 );
 
-const ContactDetailsScreen = ({route}) => {
+const ContactDetailsScreen = ({navigation, route}) => {
   const person = route?.params?.person;
   const {addPerson} = useContext(PersonContext);
+  const ref = useRef();
+  console.log(ref);
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <TouchableOpacity
+          onPress={() => {
+            ref?.current?.handleSubmit();
+            navigation.goBack();
+          }}>
+          <Text style={styles.save}>Save</Text>
+        </TouchableOpacity>
+      ),
+    });
+  }, [navigation]);
   return (
     <View>
       <Text>{person.firstName}</Text>
       <Formik
         initialValues={{...person}}
-        onSubmit={values => addPerson(values)}>
+        onSubmit={values => addPerson(values)}
+        innerRef={ref}>
         {({handleChange, handleSubmit, values}) => (
           <>
             <Header title="Main Information" />
@@ -61,5 +84,9 @@ const styles = StyleSheet.create({
     backgroundColor: LIGHT_GREY,
     paddingVertical: 2,
     marginVertical: 5,
+  },
+  save: {
+    color: PRIMARY_COLOR,
+    fontSize: 18,
   },
 });
