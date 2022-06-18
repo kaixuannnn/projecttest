@@ -1,4 +1,5 @@
 import {
+  ScrollView,
   StyleSheet,
   Text,
   TouchableHighlight,
@@ -6,6 +7,7 @@ import {
   View,
 } from 'react-native';
 import React, {useContext, useLayoutEffect} from 'react';
+import * as Yup from 'yup';
 import AppTextInput from '../components/AppTextInput';
 import {LIGHT_GREY, PRIMARY_COLOR} from '../config/colors';
 import {Formik} from 'formik';
@@ -17,6 +19,11 @@ const Header = ({title}) => (
     <Text>{title}</Text>
   </View>
 );
+
+const validationSchema = Yup.object().shape({
+  firstName: Yup.string().required(),
+  lastName: Yup.string().required(),
+});
 
 const ContactDetailsScreen = ({navigation, route}) => {
   const person = route?.params?.person;
@@ -34,7 +41,6 @@ const ContactDetailsScreen = ({navigation, route}) => {
         <TouchableOpacity
           onPress={() => {
             formikRef?.current?.handleSubmit();
-            navigation.goBack();
           }}>
           <Text style={styles.save}>Save</Text>
         </TouchableOpacity>
@@ -43,12 +49,16 @@ const ContactDetailsScreen = ({navigation, route}) => {
   }, [navigation]);
 
   return (
-    <View>
+    <ScrollView>
       <View style={styles.iconPlaceholder} />
       <Formik
         initialValues={{...person}}
-        onSubmit={values => addPerson(values)}
-        innerRef={formikRef}>
+        onSubmit={values => {
+          addPerson(values);
+          navigation.goBack();
+        }}
+        innerRef={formikRef}
+        validationSchema={validationSchema}>
         {({handleChange, handleSubmit, values}) => (
           <>
             <Header title="Main Information" />
@@ -83,7 +93,7 @@ const ContactDetailsScreen = ({navigation, route}) => {
           </>
         )}
       </Formik>
-    </View>
+    </ScrollView>
   );
 };
 
