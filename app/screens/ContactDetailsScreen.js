@@ -2,7 +2,6 @@ import {
   ScrollView,
   StyleSheet,
   Text,
-  TouchableHighlight,
   TouchableOpacity,
   View,
 } from 'react-native';
@@ -13,6 +12,7 @@ import {LIGHT_GREY, PRIMARY_COLOR} from '../config/colors';
 import {Formik} from 'formik';
 import PersonContext from '../contexts/PersonContext';
 import {useRef} from 'react';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 const Header = ({title}) => (
   <View style={styles.header}>
@@ -49,7 +49,7 @@ const ContactDetailsScreen = ({navigation, route}) => {
   }, [navigation]);
 
   return (
-    <ScrollView>
+    <KeyboardAwareScrollView>
       <View style={styles.iconPlaceholder} />
       <Formik
         initialValues={{...person}}
@@ -93,7 +93,7 @@ const ContactDetailsScreen = ({navigation, route}) => {
           </>
         )}
       </Formik>
-    </ScrollView>
+    </KeyboardAwareScrollView>
   );
 };
 
