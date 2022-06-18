@@ -42,6 +42,7 @@ const ContactsList = ({data}) => {
         setLoading(false);
       }}
       refreshing={loading}
+      style={styles.flatList}
     />
   );
 };
@@ -49,6 +50,9 @@ const ContactsList = ({data}) => {
 export default ContactsList;
 
 const styles = StyleSheet.create({
+  flatList: {
+    paddingTop: 15,
+  },
   iconPlaceholder: {
     height: 40,
     width: 40,
