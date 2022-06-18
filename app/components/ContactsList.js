@@ -59,6 +59,7 @@ const styles = StyleSheet.create({
   listItem: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginHorizontal: 15,
   },
   separator: {
     backgroundColor: LIGHT_GREY,

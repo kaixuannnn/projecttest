@@ -44,7 +44,7 @@ const ContactDetailsScreen = ({navigation, route}) => {
 
   return (
     <View>
-      <Text>{person.firstName}</Text>
+      <View style={styles.iconPlaceholder} />
       <Formik
         initialValues={{...person}}
         onSubmit={values => addPerson(values)}
@@ -90,10 +90,20 @@ const ContactDetailsScreen = ({navigation, route}) => {
 export default ContactDetailsScreen;
 
 const styles = StyleSheet.create({
+  iconPlaceholder: {
+    height: 80,
+    width: 80,
+    borderRadius: 40,
+    backgroundColor: PRIMARY_COLOR,
+    marginRight: 10,
+    alignSelf: 'center',
+    marginVertical: 15,
+  },
   header: {
     backgroundColor: LIGHT_GREY,
     paddingVertical: 2,
     marginVertical: 5,
+    paddingHorizontal: 15,
   },
   save: {
     color: PRIMARY_COLOR,
